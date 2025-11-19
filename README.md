@@ -6,6 +6,5 @@ A Python application that extracts text from uploaded images, eliminating the ne
 
 ## Todolist
 - tkinter gui
-- multiple languages
 - option to save output as .txt, .pdf, etc
 - allow multiple files
