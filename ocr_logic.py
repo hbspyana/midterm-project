@@ -28,8 +28,8 @@ def save_as_txt(text):
         return
 
     filename = filedialog.asksaveasfilename(
-        defaultextension='.txt',
-        filetypes=[('Text files', '*.txt')],
+        defaultextension='.txt', # appends to end of entered file name
+        filetypes=[('Text files', '*.txt')], # restricts to all files and txt files
         title='Save as TXT'
     )
     with open(filename, 'w', encoding='utf-8') as f: # 'utf-8' to encode properly
