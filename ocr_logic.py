@@ -54,9 +54,9 @@ def save_as_pdf(text):
     pdf.add_page()
     pdf.set_font('Arial', size=12)
 
-    safe_text = text.encode('latin-1', 'replace').decode('latin-1') # for unsupported chars
+    text = text.encode('latin-1', 'replace').decode('latin-1') # for unsupported chars
 
-    pdf.multi_cell(0, 10, safe_text)
+    pdf.multi_cell(0, 10, text)
     pdf.output(filename)
 
 # log
