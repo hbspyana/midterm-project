@@ -21,19 +21,18 @@ def start_gui():
         text = ocr_image(file_path)  # extract text
         text_box.delete('1.0', tk.END)
         text_box.insert(tk.END, text)
-        messagebox.showinfo('Success', 'Text extracted!')
 
     def save_txt():
         text = text_box.get('1.0', tk.END).strip()
         if not text:
-            messagebox.showwarning('No text', 'There is no text to save!')
+            messagebox.showwarning('No text found!', 'Upload an image.')
             return
         save_as_txt(text)
 
     def save_pdf():
         text = text_box.get('1.0', tk.END).strip()
         if not text:
-            messagebox.showwarning('No text', 'There is no text to save!')
+            messagebox.showwarning('No text found!', 'Upload an image.')
             return
         save_as_pdf(text)
 
