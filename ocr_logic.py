@@ -32,7 +32,7 @@ def save_as_txt(text):
         filetypes=[('Text files', '*.txt')],
         title='Save as TXT'
     )
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'w', encoding='utf-8') as f: # 'utf-8' to encode properly
             f.write(text)
 
 
