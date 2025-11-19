@@ -46,7 +46,6 @@ def save_as_pdf(text):
         messagebox.showwarning('No text found!', 'Choose an image before saving.')
         return
 
-    # ask user where to save
     filename = filedialog.asksaveasfilename(
         defaultextension='.pdf',
         filetypes=[('PDF files', '*.pdf')],
@@ -55,19 +54,15 @@ def save_as_pdf(text):
     if not filename:
         return  # user cancelled
 
-    try:
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font('Arial', size=12)
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('Arial', size=12)
 
-        # for unsupported chars
-        safe_text = text.encode('latin-1', 'replace').decode('latin-1')
+    # for unsupported chars
+    safe_text = text.encode('latin-1', 'replace').decode('latin-1')
 
-        pdf.multi_cell(0, 10, safe_text)
-        pdf.output(filename)
-        messagebox.showinfo('Saved', f'Text saved as {filename}!')
-    except Exception as e:
-        messagebox.showerror('Error', f'Could not save PDF:\n{e}')
+    pdf.multi_cell(0, 10, safe_text)
+    pdf.output(filename)
 
 # log
 def write_log(text):
