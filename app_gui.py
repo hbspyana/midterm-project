@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from ocr_logic import ocr_image, write_log, save_as_txt, save_as_pdf
+from ocr_logic import ocr_image, save_as_txt, save_as_pdf
 
 def start_gui():
     root = tk.Tk()
@@ -13,17 +13,17 @@ def start_gui():
 
     # select image button
     def select_image():
-        file_path = filedialog.askopenfilename(
+        file_paths = filedialog.askopenfilenames(
             filetypes=[('Image Files', '*.png *.jpg *.jpeg *.bmp')],
-            title='Select an Image'
+            title='Select image(s)'
         )
 
-        text = ocr_image(file_path)  # extract text
-        text_box.delete('1.0', tk.END)
-        text_box.insert(tk.END, text)
-
+        for path in file_paths:
+            text = ocr_image(path)
+            text_box.insert(tk.END, text + "\n\n")
+            
     def save_txt():
-        text = text_box.get('1.0', tk.END).strip()
+        text = text_box.get('1.0', tk.END).strip() # extract text from text box, from 1st char (1.0) to end
         if not text:
             messagebox.showwarning('No text found!', 'Upload an image.')
             return
