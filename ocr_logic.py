@@ -48,7 +48,7 @@ def save_as_pdf(text):
         title='Save as PDF'
     )
     if not filename:
-        return  # cancel
+        return
 
     pdf = FPDF()
     pdf.add_page()
