@@ -39,8 +39,8 @@ def start_gui():
     button_frame = tk.Frame(root)
     button_frame.pack(pady=5)
 
-    tk.Button(button_frame, text='Select Image', command=select_image).pack(side='left', padx=5)
-    tk.Button(button_frame, text='Save as TXT', command=save_txt).pack(side='left', padx=5)
-    tk.Button(button_frame, text='Save as PDF', command=save_pdf).pack(side='left', padx=5)
+    tk.Button(button_frame, text='Select image(s)', command=select_image).pack(side='left', padx=5)
+    tk.Button(button_frame, text='Save as .txt', command=save_txt).pack(side='left', padx=5)
+    tk.Button(button_frame, text='Save as .pdf', command=save_pdf).pack(side='left', padx=5)
 
     root.mainloop()
