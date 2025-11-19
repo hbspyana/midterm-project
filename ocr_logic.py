@@ -1,35 +1,32 @@
 import requests
-from PIL import Image
 from fpdf import FPDF
-import pyautogui
+from tkinter import filedialog, messagebox
 
 # text extractor
 def ocr_image(image_path, lang='eng'):
     url = 'https://api.ocr.space/parse/image'
     key = 'K85709985988957'
     try:
-        f = open(image_path, 'rb')
+        f = open(image_path, 'rb') # 'rb' = 'read binary' mode; images are binary data
         files = {'file': f}
         data = {'language': lang}
         headers = {'apikey': key}
 
-        r = requests.post(url, data=data, files=files, headers=headers)
+        r = requests.post(url, data=data, files=files, headers=headers) # sends above to url
         f.close()
 
-        result = r.json()
-        text = result['ParsedResults'][0]['ParsedText']
+        result = r.json() # url sends back text
+        text = result['ParsedResults'][0]['ParsedText'] # extracts text from result
         return text
     except:
         return 'Error reading image.'
 
 # save as txt
 def save_as_txt(text):
-    from tkinter import filedialog, messagebox
     if not text.strip():
         messagebox.showwarning('No text found!', 'Choose an image before saving.')
         return
 
-    # ask user where to save
     filename = filedialog.asksaveasfilename(
         defaultextension='.txt',
         filetypes=[('Text files', '*.txt')],
@@ -41,7 +38,6 @@ def save_as_txt(text):
 
 # save as pdf
 def save_as_pdf(text):
-    from tkinter import filedialog, messagebox
     if not text.strip():
         messagebox.showwarning('No text found!', 'Choose an image before saving.')
         return
@@ -52,14 +48,13 @@ def save_as_pdf(text):
         title='Save as PDF'
     )
     if not filename:
-        return  # user cancelled
+        return  # cancel
 
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font('Arial', size=12)
 
-    # for unsupported chars
-    safe_text = text.encode('latin-1', 'replace').decode('latin-1')
+    safe_text = text.encode('latin-1', 'replace').decode('latin-1') # for unsupported chars
 
     pdf.multi_cell(0, 10, safe_text)
     pdf.output(filename)
