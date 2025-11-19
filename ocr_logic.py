@@ -19,7 +19,7 @@ def ocr_image(image_path, lang='eng'):
         text = result['ParsedResults'][0]['ParsedText'] # extracts text from result
         return text
     except:
-        return 'Error reading image.'
+        return 'ERROR: Cannot read image.'
 
 # save as txt
 def save_as_txt(text):
